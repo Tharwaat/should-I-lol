@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Should I Play League of Legends Today?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        @import url('https://code.cdn.mozilla.net/fonts/fira.css');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: 'Mozilla Headline', sans-serif;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            text-align: center;
+            padding: 2rem;
+            transition: background 0.8s ease;
+        }
+        
+        body.yes-background {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #4caf50 100%);
+        }
+        
+        body.no-background {
+            background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 50%, #f44336 100%);
+        }
+        
+        .container {
+            max-width: 100%;
+            width: 100%;
+            padding: 0 2rem;
+        }
+        
+        h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;  /* Changed font to Bebas Neue */
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            letter-spacing: 10px;  /* Increased from 2px to 15px for more spacing */
+        }
+        
+        .answer-section {
+            padding: 3rem 0;
+            margin: 2rem 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .answer {
+            font-size: 5rem;
+            font-weight: 700;
+            font-family: 'Bebas Neue', sans-serif;  /* Changed font to Bebas Neue */
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            letter-spacing: 3px;
+        }
+        
+        .answer.yes {
+            color: #000000;
+        }
+        
+        .answer.no {
+            color: #000000;
+        }
+        
+        .reason {
+            font-size: 3rem;
+            font-family: 'Bebas Neue', sans-serif;  /* Changed font to Bebas Neue */
+            color: rgba(0, 0, 0, 0.8);
+            line-height: 1.5;
+            width: 100%;
+            margin: 0 auto;
+            letter-spacing: 1px;
+        }
+        
+        .button-49,
+        .button-49:after {
+            width: 150px;
+            height: 76px;
+            line-height: 78px;
+            font-size: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            background: linear-gradient(45deg, transparent 5%, #000000 5%);
+            border: 0;
+            color: #fff;
+            letter-spacing: 3px;
+            box-shadow: 6px 0px 0px #fcce00;
+            outline: transparent;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+        
+        .button-49:after {
+            --slice-0: inset(50% 50% 50% 50%);
+            --slice-1: inset(80% -6px 0 0);
+            --slice-2: inset(50% -6px 30% 0);
+            --slice-3: inset(10% -6px 85% 0);
+            --slice-4: inset(40% -6px 43% 0);
+            --slice-5: inset(80% -6px 5% 0);
+            
+            content: 'SHOULD I?';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 3%, #8B0000 3%, #8B0000 5%, #000000 5%);
+            text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #8B0000;
+            clip-path: var(--slice-0);
+        }
+        
+        .button-49:hover:after {
+            animation: 1s glitch;
+            animation-timing-function: steps(2, end);
+        }
+        
+        .button-49:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .button-49:disabled:hover:after {
+            animation: none;
+        }
+        
+        @keyframes glitch {
+            0% {
+                clip-path: var(--slice-1);
+                transform: translate(-20px, -10px);
+            }
+            10% {
+                clip-path: var(--slice-3);
+                transform: translate(10px, 10px);
+            }
+            20% {
+                clip-path: var(--slice-1);
+                transform: translate(-10px, 10px);
+            }
+            30% {
+                clip-path: var(--slice-3);
+                transform: translate(0px, 5px);
+            }
+            40% {
+                clip-path: var(--slice-2);
+                transform: translate(-5px, 0px);
+            }
+            50% {
+                clip-path: var(--slice-3);
+                transform: translate(5px, 0px);
+            }
+            60% {
+                clip-path: var(--slice-4);
+                transform: translate(5px, 10px);
+            }
+            70% {
+                clip-path: var(--slice-2);
+                transform: translate(-10px, 10px);
+            }
+            80% {
+                clip-path: var(--slice-5);
+                transform: translate(20px, -10px);
+            }
+            90% {
+                clip-path: var(--slice-1);
+                transform: translate(-10px, 0px);
+            }
+            100% {
+                clip-path: var(--slice-1);
+                transform: translate(0);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .button-49,
+            .button-49:after {
+                width: 200px;
+                height: 86px;
+                line-height: 88px;
+            }
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 0.9rem;
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: color 0.8s ease;
+        }
+        
+        body.yes-background .footer,
+        body.no-background .footer {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer a {
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        /* .footer a:hover {
+            text-decoration: underline;
+        } */
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .answer {
+                font-size: 3rem;
+            }
+            
+            .answer-section {
+                padding: 2rem 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .answer {
+                font-size: 2.5rem;
+            }
+            
+            .reason {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Should I Play League of Legends Today?</h1>
+        
+        <div class="answer-section">
+            <div class="answer" id="answer">¯\_(ツ)_/¯</div>
+            <div class="reason" id="reason"></div>
+        </div>
+        
+        <button class="button-49" id="decideBtn" onclick="makeDecision()">
+            SHOULD I?
+        </button>
+        
+        <div class="footer">
+            <p>Made with 🖤 by <a href="https://github.com/Tharwaat" target="_blank">DarQo</a></p>
+        </div>
+    </div>
+
+    <script>
+        const loadingMessages = [
+            "Consulting the wisdom of the Rift...",
+            "Summoning the ancient oracles...",
+            "Checking your match history karma...",
+            "Asking Baron for guidance...",
+            "Consulting the Elder Dragon...",
+            "Reading the runes of destiny...",
+            "Channeling the power of the nexus...",
+            "Seeking wisdom from the void...",
+            "Calculating your tilt probability...",
+            "Consulting the League gods...",
+            "Checking the alignment of the stars...",
+            "Asking Riot's spaghetti code...",
+            "Summoning the spirit of Faker...",
+            "Reading the tea leaves of solo queue...",
+            "Consulting the magic 8-ball of the Rift...",
+            "Checking if mercury is in microwave...",
+            "Asking the wisdom of bronze players...",
+            "Consulting the ancient scrolls of patch notes...",
+            "Channeling the energy of pentakills...",
+            "Seeking guidance from the jungle monsters..."
+        ];
+
+        const responses = [
+            // YES responses
+            {
+                answer: "YES",
+                reason: "If Hakim and Ammar are there, then should definitely carry us!",
+                type: "yes"
+            },
+            {
+                answer: "ABSOLUTELY",
+                reason: "The stars have aligned! Your main champion is feeling extra spicy today.",
+                type: "yes"
+            },
+            {
+                answer: "YES NEEEK!",
+                reason: "Hakim is there, what else do you need?",
+                type: "yes"
+            },
+            {
+                answer: "YES, BUT...",
+                reason: "Play one game. Just one.",
+                type: "yes"
+            },
+            {
+                answer: "YES, BUT...",
+                reason: "If you lose, uninstall the game and never come back, Okay Adham?",
+                type: "yes"
+            },
+            {
+                answer: "DEFINITELY",
+                reason: "Let's throw some MMR in the air!, Ashraf got many already!",
+                type: "yes"
+            },
+            {
+                answer: "YES, OBJECTIVES NEEDED",
+                reason: "Let's secure those dragons and barons and kos om el game everytime!",
+                type: "yes"
+            },
+            {
+                answer: "GO FOR IT",
+                reason: "Your opponent's jungler won't gank themselves. Actually, they might.",
+                type: "yes"
+            },
+            {
+                answer: "THE RIFT CALLS",
+                reason: "Baron has spoken through ancient runes. Your presence is required.",
+                type: "yes"
+            },
+            {
+                answer: "Ammar APPROVES",
+                reason: "Even if you feed, at least you'll look stylish doing it.",
+                type: "yes"
+            },
+            {
+                answer: "YES, WITH KHALED",
+                reason: "He has some cool coaching tips for you. Just don't listen to him.",
+                type: "yes"
+            },
+            {
+                answer: "Khaled, are you there?",
+                reason: "If so, we have to die clearing some wards.",
+                type: "yes"
+            },
+            // NO responses
+            {
+                answer: "NO",
+                reason: "Step away from the keyboard. Go touch some grass.",
+                type: "no"
+            },
+            {
+                answer: "NO",
+                reason: "Go away ya m3arras!",
+                type: "no"
+            },
+            {
+                answer: "NOPE",
+                reason: "1 LP less and RIOT will exchange your account with a trash can.",
+                type: "no"
+            },
+            {
+                answer: "NOT TODAY",
+                reason: "Mercury is in microwave. Your teammates are pre-tilted.",
+                type: "no"
+            },
+            {
+                answer: "ABSOLUTELY NOT",
+                reason: "Khaled is panicking now and we are all in danger.",
+                type: "no"
+            },
+            {
+                answer: "NAH FAM",
+                reason: "Beika wont gank you anyway, so why bother?",
+                type: "no"
+            },
+            {
+                answer: "HARD NO",
+                reason: "Your keyboard has suffered enough ya Ashraf. Kefaya sya7!",
+                type: "no"
+            },
+            {
+                answer: "MAYBE TOMORROW",
+                reason: "Today is a day for self-care, not solo queue despair.",
+                type: "no"
+            },
+            {
+                answer: "DON'T DO IT",
+                reason: "Hakim will insult you and will keep gaslighting you the entire game.",
+                type: "no"
+            },
+            {
+                answer: "TOUCH GRASS",
+                reason: "Get a life, bitch! Your MMR is already in the trash.",
+                type: "no"
+            },
+            {
+                answer: "Well, No!",
+                reason: "You know why? .. Adham will play Teemo top with heal!",
+                type: "no"
+            }
+        ];
+
+        function makeDecision() {
+            const answerElement = document.getElementById('answer');
+            const reasonElement = document.getElementById('reason');
+            const button = document.getElementById('decideBtn');
+            
+            // Disable button temporarily
+            button.disabled = true;
+            button.textContent = 'DECIDING...';
+            
+            // Show loading state with random loading message
+            const randomLoadingMessage = loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+            answerElement.textContent = '...';
+            reasonElement.textContent = randomLoadingMessage;
+            answerElement.className = 'answer';
+            
+            setTimeout(() => {
+                // Get random response
+                const response = responses[Math.floor(Math.random() * responses.length)];
+                
+                // Update display
+                answerElement.textContent = response.answer;
+                answerElement.className = `answer ${response.type}`;
+                reasonElement.textContent = response.reason;
+                
+                // Change background color based on answer
+                document.body.className = `${response.type}-background`;
+                
+                // Re-enable button
+                button.disabled = false;
+                button.textContent = 'SHOULD I?';
+            }, 1000);
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space' || event.code === 'Enter') {
+                event.preventDefault();
+                if (!document.getElementById('decideBtn').disabled) {
+                    makeDecision();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
